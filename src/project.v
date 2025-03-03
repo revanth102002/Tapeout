@@ -16,12 +16,23 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+	reg [4:0] sumTemp;
+	always@(posedge clk)begin
+		if(!rst_n)begin
+			sumTemp <= 'b0;
+		end
+		else begin
+            sumTemp <= ui_in[3:0] - ui_in[7:4]; // [3:0]ui_in input1 & [7:4] ui_in input2 ;
+		end
+	end
+
   // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
+  assign uo_out  = {3'b000,sumTemp};
   assign uio_out = 0;
   assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
+  wire _unused = &{ena,1'b0};
+
 
 endmodule
