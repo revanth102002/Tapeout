@@ -16,7 +16,7 @@ module tt_um_revanth_sub (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-	reg [4:0] sumTemp;
+	reg [3:0] sumTemp;
 	always@(posedge clk)begin
 		if(!rst_n)begin
 			sumTemp <= 'b0;
@@ -27,7 +27,7 @@ module tt_um_revanth_sub (
 	end
 
   // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = {3'b000,sumTemp};
+	assign uo_out  = {4'b0000,sumTemp};
   assign uio_out = 0;
   assign uio_oe  = 0;
 
